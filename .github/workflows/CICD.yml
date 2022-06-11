@@ -1,0 +1,24 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CICD
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Lint with flake8
+        run: |
+          curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+          source $HOME/.poetry/env
+          poetry install
+          make flake_errors
+          make flake_line
+
+      - name: tests
+        run: |
+          source $HOME/.poetry/env
+          poetry run pytest tests
