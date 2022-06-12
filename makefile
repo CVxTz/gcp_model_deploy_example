@@ -11,7 +11,7 @@ VERSION := $(shell grep -m 1 version pyproject.toml | tr -s ' ' | tr -d '"' | tr
 APP_NAME := ner_app
 
 build_docker:
-	docker build . -t ner_app:latest -t ${APP_NAME}:${VERSION}
+	docker build . -t ${APP_NAME}:latest -t ${APP_NAME}:${VERSION}
 
 run_docker:
 	docker run -p 5000:5000 -i -t ${APP_NAME}:${VERSION}
