@@ -26,7 +26,7 @@ app = FastAPI()
 
 
 @app.post("/predict/", response_model=Response)
-def create_item(in_query: Query):
+def predict(in_query: Query):
     entities = predict_entities(in_query.text)
 
     return Response(text=in_query.text, entities=[Entity(**x) for x in entities])
